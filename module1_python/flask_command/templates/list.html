@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+    <head>
+        <title>All Films</title>
+        <style>
+            input:invalid {
+                border-color: red;
+            }
+            input,
+            input:valid {
+                border-color: #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Film</th>
+                <th>Stars</th>
+            </tr>
+            {% for review in reviews %}
+            <tr>
+                <td>{{review[0]}}</td>
+                <td>{{review[1]}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <form action="/films/submit" method="post">
+                    <td><input type="text" id="film" name="film" pattern="[A-Za-z0-9 ]+" required></td>
+                    <td><input type="text" id="stars" name="stars" pattern="[0-9]{0,2}" required></td>
+                    <td><input type="submit"></td>
+                </form>
+                <script type="application/javascript">
+                    var input = document.getElementById('film');
+                    input.oninvalid = function(event) {
+                        event.target.setCustomValidity('Film should contain letters, numbers and spaces only.');
+                    }
+
+                    var input = document.getElementById('stars');
+                    input.oninvalid = function(event) {
+                        event.target.setCustomValidity('Stars should contain numbers only.');
+                    }
+                </script>
+            </tr>
+        </table>
+    </body>
+</html>
