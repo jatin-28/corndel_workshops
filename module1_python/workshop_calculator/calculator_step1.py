@@ -12,7 +12,7 @@ def calc(operation, a, b):
 
 
 operationStr = input("Enter command (<operation> <num> <num>):")
-opsList = operationStr.split(" ")
+opsList = operationStr.split(" ", maxsplit=10)
 
 print(opsList)
 

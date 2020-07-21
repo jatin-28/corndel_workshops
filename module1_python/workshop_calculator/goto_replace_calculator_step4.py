@@ -13,24 +13,30 @@ def calc(operation, a, b):
 
 def processCommand(command):
     opsList = command.split(" ")
+    if opsList[0] == 'remove':
+        return 
     if opsList[1] == 'calc':
         return calc(opsList[2], float(opsList[3]), float(opsList[4]))
     else:
         return opsList[1]
 
 
-with open("step_3_goto_calculations.txt", 'r') as f:
-    outputCommands = [x for x in f]
+with open("step_4_goto_replace.txt", 'r') as f:
+    outputCommands = [x.strip() for x in f]
 
 outputList = [processCommand(x) for x in outputCommands]
 
+print(outputList)
+
 memory = []
 
-for i in outputList:
-    linenumber = outputList[i]
+i = 0
+while i < len(outputList):
+    linenumber = int(outputList[int(i)]) - 1
     statement = outputCommands[int(linenumber)]
     if statement in memory:
         break
     memory.append(statement)
+    i = linenumber
 
-print(f"statement: {outputCommands[int(linenumber)]} , linenumber: {linenumber}")
+print(f"statement: {outputCommands[int(linenumber)]} , linenumber: {linenumber + 1}")
