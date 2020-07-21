@@ -20,17 +20,21 @@ def processCommand(command):
 
 
 with open("step_3_goto_calculations.txt", 'r') as f:
-    outputCommands = [x for x in f]
+    outputCommands = [x.strip() for x in f]
 
 outputList = [processCommand(x) for x in outputCommands]
 
+print(outputList)
+
 memory = []
 
-for i in outputList:
-    linenumber = outputList[i]
+i = 0
+while i < len(outputList):
+    linenumber = int(outputList[int(i)]) - 1
     statement = outputCommands[int(linenumber)]
     if statement in memory:
         break
     memory.append(statement)
+    i = linenumber
 
-print(f"statement: {outputCommands[int(linenumber)]} , linenumber: {linenumber}")
+print(f"statement: {outputCommands[int(linenumber)]} , linenumber: {linenumber + 1}")
